@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillBridge — Platform Micro-Job Mahasiswa & UMKM | Interactive Mockup</title>
+  <meta name="description" content="Platform yang mengubah skill mahasiswa menjadi peluang kerja dan membantu UMKM mendapatkan tenaga terampil secara fleksibel.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F2BB16'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>">
+</head>
+<body>
+
+  <!-- ==========================================
+       STUDIO TOP NAVBAR
+       ========================================== -->
+  <header class="studio-navbar">
+    <div class="brand-area">
+      <div class="brand-logo-badge" style="background: white; padding: 4px; display: flex; align-items: center; justify-content: center;">
+        <img src="assets/images/logo.png" alt="SkillBridge" style="width: 32px; height: 32px; object-fit: contain;">
+      </div>
+      <div class="brand-info">
+        <h1>SkillBridge <span class="live-badge"><span class="live-dot"></span> Interactive Mockup</span></h1>
+        <p>Platform Micro-Job Mahasiswa & UMKM • Palet Warna Resmi & Desain Hibrida Glints × LinkedIn</p>
+      </div>
+    </div>
+
+    <!-- Center Mode Switchers -->
+    <div class="studio-center-controls">
+      <button class="nav-tab-btn active" id="tabPhoneSimulator" onclick="switchStudioMode('simulator')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+        Simulator Interaktif
+      </button>
+      <button class="nav-tab-btn" id="tabMultiShowcase" onclick="switchStudioMode('showcase')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        Multi-Screen Gallery
+      </button>
+      <button class="nav-tab-btn" id="tabDesignSystem" onclick="switchStudioMode('design-system')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><line x1="2" y1="12" x2="22" y2="12"></line></svg>
+        Palet & Design System
+      </button>
+    </div>
+
+    <!-- Role Switcher -->
+    <div class="role-switch-container">
+      <span style="font-size: 11px; color: var(--c-mint-soft); font-weight: 700;">PERSPEKTIF:</span>
+      <div class="role-pill">
+        <button class="role-btn active" id="btnRoleStudent" onclick="switchUserRole('student')">🎓 Mahasiswa</button>
+        <button class="role-btn" id="btnRoleUMKM" onclick="switchUserRole('umkm')">🏪 Pemilik UMKM</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN CONTENT CONTAINER
+       ========================================== -->
+  <main class="studio-main">
+
+    <!-- ==========================================
+         VIEW 1: PHONE SIMULATOR
+         ========================================== -->
+    <div id="viewSimulator">
+      
+      <!-- Simulator Navigation Toolbar -->
+      <div class="simulator-toolbar">
+        <div class="screen-shortcuts">
+          <span style="font-size: 12px; color: var(--c-mint-soft); font-weight: 700; margin-right: 4px;">PILIH LAYAR:</span>
+          <button class="screen-btn active" data-screen="screen-home" onclick="navToScreen('screen-home')">
+            <span>🏠</span> Beranda
+          </button>
+          <button class="screen-btn" data-screen="screen-nearby" onclick="navToScreen('screen-nearby')">
+            <span>🗺️</span> Peta Nearby (Radius)
+          </button>
+          <button class="screen-btn" data-screen="screen-detail" onclick="navToScreen('screen-detail')">
+            <span>📄</span> Detail Pekerjaan
+          </button>
+          <button class="screen-btn" data-screen="screen-success" onclick="navToScreen('screen-success')">
+            <span>🎉</span> Sukses Melamar
+          </button>
+          <button class="screen-btn" data-screen="screen-chat" onclick="navToScreen('screen-chat')">
+            <span>💬</span> Chat & Escrow
+          </button>
+          <button class="screen-btn" data-screen="screen-profile" onclick="navToScreen('screen-profile')">
+            <span>👤</span> Profil & Skill
+          </button>
+          <button class="screen-btn" data-screen="screen-umkm-post" id="btnUmkmPostNav" onclick="navToScreen('screen-umkm-post')" style="display: none; background: #FEF3C7; color: #92400E; border-color: #FDE68A;">
+            <span>➕</span> Pasang Lowongan
+          </button>
+        </div>
+
+        <div class="scale-controls">
+          <span style="font-size: 11px; color: var(--c-mint-soft);">Zoom:</span>
+          <button class="scale-btn" onclick="adjustScale(-0.1)">-</button>
+          <span class="scale-text" id="scaleIndicator">100%</span>
+          <button class="scale-btn" onclick="adjustScale(0.1)">+</button>
+        </div>
+      </div>
+
+      <!-- Simulator Stage with Device Frame -->
+      <div class="simulator-stage">
+        <div class="device-glow"></div>
+
+        <div class="phone-wrapper" id="phoneWrapper">
+          <div class="phone-inner">
+
+            <!-- iPhone 16 Status Bar -->
+            <div class="phone-status-bar" id="phoneStatusBar">
+              <span class="status-time">09:41</span>
+              <div class="dynamic-island">
+                <div class="sensor-dot"></div>
+                <div class="camera-lens"></div>
+              </div>
+              <div class="status-icons">
+                <!-- Signal -->
+                <svg viewBox="0 0 24 24"><path d="M2 20h20L12 4 2 20z"/></svg>
+                <!-- Wifi -->
+                <svg viewBox="0 0 24 24"><path d="M12 3C7.03 3 2.65 5.09.03 8.43L12 21.5 23.97 8.42C21.35 5.09 16.97 3 12 3z"/></svg>
+                <!-- Battery -->
+                <svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+              </div>
+            </div>
+
+            <!-- Viewport Containing Active Screens -->
+            <div class="phone-screen-viewport" id="viewport">
+
+              <!-- ==============================================
+                   SCREEN 1: BERANDA MAHASISWA (HOME)
+                   ============================================== -->
+              <div class="screen-container active" id="screen-home">
+                
+                <!-- Curved Teal Header inspired by Reference 2 -->
+                <div class="home-curved-header">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                    <div style="background: white; border-radius: 20px; padding: 5px 12px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                      <img src="assets/images/logo.png" alt="SkillBridge" style="height: 22px; width: auto; object-fit: contain;">
+                      <span style="font-size: 13.5px; font-weight: 800; color: #0E6973; letter-spacing: -0.2px;">SkillBridge</span>
+                    </div>
+                    <button class="header-action-btn" onclick="showToast('Notifikasi: Kopi Sentosa menyukai portofoliomu!')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                      <span class="dot-alert"></span>
+                    </button>
+                  </div>
+                  <div class="user-top-row">
+                    <div class="user-profile-meta" onclick="navToScreen('screen-profile')" style="cursor: pointer;">
+                      <div class="avatar-wrapper">
+                        <img src="assets/images/avatar_ryan.jpg" alt="Edwin Iqbal" class="user-avatar-img">
+                        <span class="online-badge"></span>
+                      </div>
+                      <div>
+                        <p class="greeting-text">Hallo,</p>
+                        <h3 class="greeting-name">
+                          Edwin Iqbal Santoso
+                          <svg class="verified-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tagline (PDF page 12) -->
+                  <div class="hero-tagline-area">
+                    <h2>Take Big<br><span class="tagline-underline">Steps in Your Career</span></h2>
+                  </div>
+
+                  <!-- Search Bar & Filter Button -->
+                  <div class="search-filter-wrapper">
+                    <div class="search-input-box">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                      <input type="text" id="searchInput" placeholder="Search here (Desain, Medsos, Kas)..">
+                    </div>
+                    <button class="filter-btn-square" onclick="showFilterModal()">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Escrow Quick Balance Pill -->
+                <div class="escrow-quick-pill" onclick="navToScreen('screen-chat')">
+                  <div class="escrow-left">
+                    <div class="escrow-icon-shield">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <div class="escrow-labels">
+                      <h4>SafePay Escrow Aktif</h4>
+                      <p>Rp 2.500.000 (Terlindungi)</p>
+                    </div>
+                  </div>
+                  <span class="escrow-right-badge">Proyek Berjalan ›</span>
+                </div>
+
+                <!-- Category Pills (Horizontal Scroll) -->
+                <div class="category-scroll-section">
+                  <button class="category-pill active" onclick="filterCategory(this, 'all')">Semua (18)</button>
+                  <button class="category-pill" onclick="filterCategory(this, 'desain')">🎨 Desain Grafis (6)</button>
+                  <button class="category-pill" onclick="filterCategory(this, 'sosmed')">📱 Medsos & Konten (5)</button>
+                  <button class="category-pill" onclick="filterCategory(this, 'pembukuan')">📊 Pembukuan Kas (3)</button>
+                  <button class="category-pill" onclick="filterCategory(this, 'webit')">💻 Web & IT (2)</button>
+                  <button class="category-pill" onclick="filterCategory(this, 'admin')">📝 Admin UMKM (2)</button>
+                </div>
+
+                <!-- Section: Recommendation (PDF Page 12) -->
+                <div class="section-title-row">
+                  <h3>Recommendation</h3>
+                  <button class="show-all-link" onclick="showToast('Menampilkan 12 lowongan rekomendasi AI..')">Show All</button>
+                </div>
+
+                <div class="recommendation-carousel">
+                  <!-- Recom Card 1 -->
+                  <div class="recom-card" onclick="openJobDetail('kopi-sentosa')">
+                    <button class="bookmark-toggle-btn active" onclick="toggleBookmark(event, this)">
+                      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                    </button>
+                    <div class="recom-thumb-box">
+                      <img src="assets/images/coffee_shop.jpg" alt="Kopi Sentosa">
+                      <span class="recom-tag-badge">1.8 km • Senopati</span>
+                    </div>
+                    <h4 class="recom-job-title">Redesign Menu & Feed Instagram</h4>
+                    <p class="recom-umkm-name">☕ Kopi Sentosa Cafe</p>
+                    <div class="recom-salary">Rp 2.500.000</div>
+                    <div class="recom-meta-row">
+                      <span class="meta-icon-item">⏱️ 3 Hari yang lalu</span>
+                      <span class="meta-icon-item">💼 Fleksibel</span>
+                    </div>
+                  </div>
+
+                  <!-- Recom Card 2 -->
+                  <div class="recom-card" onclick="openJobDetail('desain-brand')">
+                    <button class="bookmark-toggle-btn" onclick="toggleBookmark(event, this)">
+                      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                    </button>
+                    <div class="recom-thumb-box">
+                      <img src="assets/images/design_workspace.jpg" alt="Batik Lestari">
+                      <span class="recom-tag-badge">Remote • Fleksibel</span>
+                    </div>
+                    <h4 class="recom-job-title">UI/UX & Brand Guide UMKM</h4>
+                    <p class="recom-umkm-name">🎨 Batik Kinanti Boutique</p>
+                    <div class="recom-salary">Rp 3.500.000</div>
+                    <div class="recom-meta-row">
+                      <span class="meta-icon-item">⏱️ 1 Hari yang lalu</span>
+                      <span class="meta-icon-item">💼 Micro-Job</span>
+                    </div>
+                  </div>
+
+                  <!-- Recom Card 3 -->
+                  <div class="recom-card" onclick="openJobDetail('kas-excel')">
+                    <button class="bookmark-toggle-btn" onclick="toggleBookmark(event, this)">
+                      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                    </button>
+                    <div class="recom-thumb-box">
+                      <img src="assets/images/bookkeeping.jpg" alt="Pembukuan Kas">
+                      <span class="recom-tag-badge">2.4 km • Tebet</span>
+                    </div>
+                    <h4 class="recom-job-title">Pembukuan Kas Sederhana Excel</h4>
+                    <p class="recom-umkm-name">📊 Toko Grosir Barokah</p>
+                    <div class="recom-salary">Rp 1.500.000</div>
+                    <div class="recom-meta-row">
+                      <span class="meta-icon-item">⏱️ 2 Hari yang lalu</span>
+                      <span class="meta-icon-item">💼 Part-time</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Banner Peta Terdekat (CTA to Nearby Map) -->
+                <div class="nearby-cta-banner" onclick="navToScreen('screen-nearby')">
+                  <div class="nearby-banner-content">
+                    <h4>📍 Eksplor UMKM Terdekat</h4>
+                    <p>Ada 5 micro-job UMKM dalam radius 3 km dari lokasimu saat ini.</p>
+                  </div>
+                  <div class="nearby-pill-btn">
+                    Buka Peta ›
+                  </div>
+                </div>
+
+                <!-- Section: Lowongan Terbaru (Feed Vertikal) -->
+                <div class="section-title-row">
+                  <h3>Peluang Terbaru Hari Ini</h3>
+                  <button class="show-all-link" onclick="showToast('Memperbarui lowongan terbaru..')">Terbaru</button>
+                </div>
+
+                <div class="vertical-jobs-list">
+                  <!-- Card 1 -->
+                  <div class="vertical-job-card" onclick="openJobDetail('kopi-sentosa')">
+                    <div class="umkm-thumb-circle">
+                      <img src="assets/images/coffee_shop.jpg" alt="Kopi Sentosa">
+                    </div>
+                    <div class="v-job-info">
+                      <div class="v-job-header-row">
+                        <h4 class="v-job-title">Desain Feed & Menu Baru</h4>
+                        <button class="bookmark-toggle-btn" style="position:static;" onclick="toggleBookmark(event, this)">
+                          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </button>
+                      </div>
+                      <p class="v-umkm-meta">Kopi Sentosa Cafe • Senopati</p>
+                      <div class="v-badges-row">
+                        <span class="verified-umkm-chip">⭐ 4.9 UMKM Terverifikasi</span>
+                        <span class="skill-chip">Canva</span>
+                        <span class="skill-chip">Figma</span>
+                      </div>
+                      <div class="v-bottom-row">
+                        <div class="v-salary">Rp 2.500.000</div>
+                        <span class="v-distance-tag">📍 1.8 km</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 2 -->
+                  <div class="vertical-job-card" onclick="openJobDetail('kas-excel')">
+                    <div class="umkm-thumb-circle">
+                      <img src="assets/images/bookkeeping.jpg" alt="Toko Grosir">
+                    </div>
+                    <div class="v-job-info">
+                      <div class="v-job-header-row">
+                        <h4 class="v-job-title">Data Analyst & Kas UMKM</h4>
+                        <button class="bookmark-toggle-btn" style="position:static;" onclick="toggleBookmark(event, this)">
+                          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </button>
+                      </div>
+                      <p class="v-umkm-meta">Toko Grosir Barokah • Tebet</p>
+                      <div class="v-badges-row">
+                        <span class="verified-umkm-chip">🛡️ Escrow SafePay</span>
+                        <span class="skill-chip">Excel</span>
+                        <span class="skill-chip">Akuntansi</span>
+                      </div>
+                      <div class="v-bottom-row">
+                        <div class="v-salary">Rp 1.500.000</div>
+                        <span class="v-distance-tag">📍 2.4 km</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 3 -->
+                  <div class="vertical-job-card" onclick="openJobDetail('desain-brand')">
+                    <div class="umkm-thumb-circle">
+                      <img src="assets/images/design_workspace.jpg" alt="Batik Kinanti">
+                    </div>
+                    <div class="v-job-info">
+                      <div class="v-job-header-row">
+                        <h4 class="v-job-title">Foto Produk & Katalog Shopee</h4>
+                        <button class="bookmark-toggle-btn" style="position:static;" onclick="toggleBookmark(event, this)">
+                          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </button>
+                      </div>
+                      <p class="v-umkm-meta">Batik Kinanti Boutique • Kemang</p>
+                      <div class="v-badges-row">
+                        <span class="verified-umkm-chip">⭐ 5.0 Star</span>
+                        <span class="skill-chip">Photoshop</span>
+                        <span class="skill-chip">Foto Produk</span>
+                      </div>
+                      <div class="v-bottom-row">
+                        <div class="v-salary">Rp 3.000.000</div>
+                        <span class="v-distance-tag">📍 3.1 km</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="height: 24px;"></div>
+              </div>
+
+
+              <!-- ==============================================
+                   SCREEN 2: PETA PEKERJAAN TERDEKAT (NEARBY MAP)
+                   Matches PDF Pages 2, 7, 8, 26-31
+                   ============================================== -->
+              <div class="screen-container" id="screen-nearby">
+                <div class="nearby-map-screen">
+                  
+                  <!-- Top Floating Map Bar -->
+                  <div class="map-top-bar">
+                    <button class="map-back-btn" onclick="navToScreen('screen-home')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    </button>
+                    <div class="map-title-chip">
+                      <span>📍</span> Nearby Micro-Jobs
+                    </div>
+                    <button class="map-filter-radius-btn" onclick="cycleMapRadius()">
+                      <span id="radiusLabel">Radius: 3 KM</span> ▾
+                    </button>
+                  </div>
+
+                  <!-- Stylized City Map Canvas -->
+                  <div class="map-canvas-container" id="mapCanvas">
+                    <!-- SVG Architectural City Blocks -->
+                    <svg class="map-svg-grid" viewBox="0 0 400 680" xmlns="http://www.w3.org/2000/svg">
+                      <!-- Base background -->
+                      <rect width="400" height="680" fill="#E8EFF2"/>
+                      
+                      <!-- City Blocks / Building Parcels (Matches PDF Page 2, 7, 8) -->
+                      <g fill="#D5E2E8" rx="6">
+                        <rect x="20" y="70" width="80" height="60" rx="8"/>
+                        <rect x="115" y="60" width="120" height="75" rx="8"/>
+                        <rect x="250" y="70" width="130" height="60" rx="8"/>
+                        
+                        <rect x="25" y="150" width="100" height="70" rx="8"/>
+                        <rect x="140" y="155" width="110" height="90" rx="8"/>
+                        <rect x="270" y="150" width="110" height="85" rx="8"/>
+                        
+                        <rect x="20" y="240" width="90" height="80" rx="8"/>
+                        <rect x="130" y="265" width="140" height="110" rx="8"/>
+                        <rect x="290" y="255" width="90" height="90" rx="8"/>
+                        
+                        <rect x="30" y="340" width="80" height="95" rx="8"/>
+                        <rect x="290" y="365" width="90" height="100" rx="8"/>
+
+                        <rect x="25" y="455" width="110" height="85" rx="8"/>
+                        <rect x="155" y="395" width="115" height="120" rx="8"/>
+                        <rect x="290" y="485" width="90" height="80" rx="8"/>
+
+                        <rect x="30" y="560" width="120" height="90" rx="8"/>
+                        <rect x="170" y="535" width="100" height="115" rx="8"/>
+                        <rect x="290" y="585" width="90" height="70" rx="8"/>
+                      </g>
+
+                      <!-- Main Roads Grid Lines -->
+                      <g stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="0" y1="140" x2="400" y2="140"/>
+                        <line x1="0" y1="235" x2="400" y2="235"/>
+                        <line x1="0" y1="385" x2="400" y2="385"/>
+                        <line x1="0" y1="525" x2="400" y2="525"/>
+                        <line x1="120" y1="0" x2="120" y2="680"/>
+                        <line x1="260" y1="0" x2="260" y2="680"/>
+                      </g>
+
+                      <!-- Glowing Route Navigation Polyline (Matches PDF Page 2 & 27) -->
+                      <polyline id="routePolyline" 
+                        points="65,490 65,315 125,315 125,210 265,210 265,115" 
+                        fill="none" 
+                        stroke="#118C8C" 
+                        stroke-width="5" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"
+                        stroke-dasharray="8 4"
+                      />
+                    </svg>
+
+                    <!-- User GPS Marker (Student Edwin at origin) -->
+                    <div class="user-gps-marker" style="left: 65px; top: 490px;">
+                      <div class="user-pulse-ring"></div>
+                      <div class="user-marker-circle">
+                        <img src="assets/images/avatar_ryan.jpg" alt="Edwin">
+                      </div>
+                    </div>
+
+                    <!-- Distance Tooltip Badge (like PDF page 2: "10.3KM" or "1.8KM") -->
+                    <div class="map-distance-tooltip" id="mapDistanceTooltip" style="left: 170px; top: 210px;">
+                      <span>⚡</span> <strong id="distanceVal">1.8 KM</strong> • 12 Mnt
+                    </div>
+
+                    <!-- UMKM Job Pins (Clickable) -->
+                    <!-- Pin 1: Kopi Sentosa (Selected) -->
+                    <div class="map-job-pin selected" id="pin-kopi-sentosa" style="left: 265px; top: 115px;" onclick="selectMapPin('kopi-sentosa', 265, 115, '1.8 KM', 'Redesign Menu & Feed IG', 'Kopi Sentosa Cafe', 'Rp 2.500.000', 'assets/images/coffee_shop.jpg')">
+                      <div class="pin-bubble">
+                        <span class="pin-icon">☕</span>
+                        <span class="pin-title">Kopi Sentosa</span>
+                      </div>
+                      <div class="pin-pointer"></div>
+                    </div>
+
+                    <!-- Pin 2: Batik Lestari -->
+                    <div class="map-job-pin" id="pin-batik-lestari" style="left: 310px; top: 310px;" onclick="selectMapPin('batik-lestari', 310, 310, '3.2 KM', 'UI/UX & Brand Guide', 'Batik Kinanti', 'Rp 3.500.000', 'assets/images/design_workspace.jpg')">
+                      <div class="pin-bubble">
+                        <span class="pin-icon">🎨</span>
+                        <span class="pin-title">Batik Kinanti</span>
+                      </div>
+                      <div class="pin-pointer"></div>
+                    </div>
+
+                    <!-- Pin 3: Toko Grosir Barokah -->
+                    <div class="map-job-pin" id="pin-toko-grosir" style="left: 120px; top: 600px;" onclick="selectMapPin('toko-grosir', 120, 600, '2.1 KM', 'Pembukuan Kas Excel', 'Grosir Barokah', 'Rp 1.500.000', 'assets/images/bookkeeping.jpg')">
+                      <div class="pin-bubble">
+                        <span class="pin-icon">📊</span>
+                        <span class="pin-title">Grosir Barokah</span>
+                      </div>
+                      <div class="pin-pointer"></div>
+                    </div>
+                  </div>
+
+                  <!-- Floating Bottom Card (like PDF page 2, 8, 29) -->
+                  <div class="map-bottom-sheet" id="mapBottomSheet">
+                    <div class="sheet-thumb">
+                      <img id="sheetImg" src="assets/images/coffee_shop.jpg" alt="Thumbnail">
+                    </div>
+                    <div class="sheet-info">
+                      <h4 class="sheet-job-title" id="sheetTitle">Redesign Menu & Feed IG</h4>
+                      <p class="sheet-umkm-name" id="sheetUmkm">Kopi Sentosa Cafe • 1.8 KM</p>
+                      <div class="sheet-salary" id="sheetSalary">Rp 2.500.000</div>
+                    </div>
+                    <button class="sheet-details-btn" onclick="openJobDetail('kopi-sentosa')">
+                      Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- ==============================================
+                   SCREEN 3: DETAIL PEKERJAAN ("TENTANG PEKERJAAN")
+                   Matches PDF Page 1, 4, 10, 32 + Reference 2
+                   ============================================== -->
+              <div class="screen-container" id="screen-detail">
+                <div class="job-detail-screen">
+                  
+                  <!-- Top Navigation Bar -->
+                  <div class="detail-nav-bar">
+                    <button class="detail-back-btn" onclick="navToScreen('screen-home')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    </button>
+                    <div class="detail-nav-center">
+                      <h3>Tentang Pekerjaan</h3>
+                      <p>Finish with your great skills</p>
+                    </div>
+                    <div class="detail-actions-right">
+                      <button class="action-circle-btn" onclick="showToast('Tautan lowongan disalin!')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                      </button>
+                      <button class="action-circle-btn" onclick="toggleBookmark(event, this)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Detail Scrollable Content -->
+                  <div class="detail-content-scroll">
+                    <!-- Hero Banner -->
+                    <div class="detail-hero-banner">
+                      <img id="detailBannerImg" src="assets/images/coffee_shop.jpg" alt="Detail Hero">
+                      <span class="detail-tag-floating" id="detailCategoryTag">Product & Content Design</span>
+                    </div>
+
+                    <!-- Job Title & Meta -->
+                    <div class="detail-main-header">
+                      <h2 class="detail-job-heading" id="detailJobHeading">REDESIGN MENU & FEED INSTAGRAM</h2>
+                      <p class="detail-sub-category" id="detailSubCategory">Kopi Sentosa Cafe • Micro-Job Fleksibel</p>
+                      <span class="detail-deadline-chip">
+                        <span>⏳</span> Deadline Oct 20, 2026 • 5 Hari Pengerjaan
+                      </span>
+                    </div>
+
+                    <!-- Section: Project Goal (Matches PDF) -->
+                    <div class="detail-section-block">
+                      <h4 class="detail-block-title">Project Goal</h4>
+                      <p class="detail-block-desc" id="detailProjectGoal">
+                        Membangun sebuah design style dan guideline yang bisa digunakan oleh barista & admin UMKM dalam membuat konten visual serta promosi media sosial secara konsisten dan menarik pelanggan muda.
+                      </p>
+                    </div>
+
+                    <!-- Section: Key Points (Matches PDF) -->
+                    <div class="detail-section-block">
+                      <h4 class="detail-block-title">Key Points & Deliverables</h4>
+                      <div class="key-points-list" id="detailKeyPoints">
+                        <div class="key-point-item">
+                          <span class="point-bull-icon"></span>
+                          <span>Color, Typography, dan Grid Template feed</span>
+                        </div>
+                        <div class="key-point-item">
+                          <span class="point-bull-icon"></span>
+                          <span>9 Desain Feed Instagram + 3 Story Template (Canva/Figma)</span>
+                        </div>
+                        <div class="key-point-item">
+                          <span class="point-bull-icon"></span>
+                          <span>Desain Menu Meja & Barcode QRIS Siap Cetak</span>
+                        </div>
+                        <div class="key-point-item">
+                          <span class="point-bull-icon"></span>
+                          <span>Handbook Panduan Barista & Mini Tutoring 1 Jam</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Section: Required Skills -->
+                    <div class="detail-section-block">
+                      <h4 class="detail-block-title">Skill Terverifikasi yang Dibutuhkan</h4>
+                      <div class="skills-tags-row">
+                        <span class="skill-tag-pill">
+                          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Canva Pro
+                        </span>
+                        <span class="skill-tag-pill">
+                          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Figma
+                        </span>
+                        <span class="skill-tag-pill">
+                          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Instagram Marketing
+                        </span>
+                        <span class="skill-tag-pill">
+                          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> Copywriting
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Section: UMKM Trust & Escrow Guarantee -->
+                    <div class="umkm-trust-card">
+                      <div class="umkm-profile-row">
+                        <div class="umkm-avatar-box">
+                          <img src="assets/images/coffee_shop.jpg" alt="UMKM">
+                        </div>
+                        <div class="umkm-name-block">
+                          <h4>Kopi Sentosa Senopati <span class="verified-icon" style="display:inline-block; vertical-align:middle;">✓</span></h4>
+                          <div class="umkm-rating-stars">
+                            <span>⭐⭐⭐⭐⭐</span> 4.9 (34 ulasan mahasiswa)
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="safepay-guarantee-row">
+                        <svg class="safepay-shield-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <div class="safepay-text">
+                          <h5>SkillBridge SafePay Protected</h5>
+                          <p>Dana honor sebesar <strong id="detailEscrowTxt">Rp 2.500.000</strong> sudah disetor & diamankan di rekening bersama. Pasti cair otomatis setelah pekerjaan disetujui!</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Sticky Bottom Salary & Apply Bar (Matches PDF) -->
+                  <div class="detail-sticky-bar">
+                    <div class="salary-column">
+                      <span class="salary-label">Total Salary</span>
+                      <span class="salary-amount-large" id="detailSalaryLarge">Rp 2.500.000</span>
+                    </div>
+                    <button class="apply-cta-btn" onclick="openApplyModal()">
+                      Apply for Project
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- ==============================================
+                   SCREEN 4: SUCCESS APPLIED SCREEN
+                   Matches PDF Pages 14-16, 24-25
+                   ============================================== -->
+              <div class="screen-container" id="screen-success">
+                <div class="success-screen">
+                  
+                  <!-- Vector Celebration Illustration (Matches PDF) -->
+                  <div class="success-illustration-box">
+                    <img src="assets/images/success_applied.jpg" alt="Success Applied">
+                  </div>
+
+                  <!-- Text Headings -->
+                  <h2 class="success-title">Success. You've Applied.</h2>
+                  <p class="success-desc">
+                    Kami akan memberikan informasi terbaru melalui kanal Message & Notifikasi.
+                  </p>
+
+                  <!-- Step Tracker -->
+                  <div class="status-tracker-box">
+                    <div class="tracker-item">
+                      <div class="tracker-icon done">✓</div>
+                      <div class="tracker-text">
+                        <h5>Lamaran & Portofolio Terkirim</h5>
+                        <p>Baru saja • Edwin Iqbal Santoso (Fasilkom UI)</p>
+                      </div>
+                    </div>
+
+                    <div class="tracker-item">
+                      <div class="tracker-icon pending">●</div>
+                      <div class="tracker-text">
+                        <h5>Review oleh Pemilik UMKM</h5>
+                        <p>Estimasi respon dalam 24 jam</p>
+                      </div>
+                    </div>
+
+                    <div class="tracker-item">
+                      <div class="tracker-icon waiting">○</div>
+                      <div class="tracker-text">
+                        <h5>Pengerjaan & Escrow SafePay Aktif</h5>
+                        <p>Dana Rp 2.500.000 terkunci aman</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- CTAs -->
+                  <div class="success-actions-col">
+                    <button class="discover-more-btn" onclick="navToScreen('screen-chat')">
+                      Buka Chat dengan UMKM 💬
+                    </button>
+                    <button class="view-chat-btn" onclick="navToScreen('screen-home')">
+                      Discover More Projects
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- ==============================================
+                   SCREEN 5: CHAT & ESCROW MILESTONE SCREEN
+                   ============================================== -->
+              <div class="screen-container" id="screen-chat">
+                <div class="chat-screen">
+                  
+                  <div class="chat-header">
+                    <button class="detail-back-btn" onclick="navToScreen('screen-home')">
+                      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    </button>
+                    <img src="assets/images/coffee_shop.jpg" alt="Hendra" class="chat-partner-avatar">
+                    <div class="chat-partner-info">
+                      <h4>Pak Hendra (Kopi Sentosa)</h4>
+                      <p>● Online • Terverifikasi UMKM</p>
+                    </div>
+                  </div>
+
+                  <!-- Escrow Locked Pill Bar -->
+                  <div class="escrow-locked-bar">
+                    <span>🔒 Escrow Terkunci: <strong>Rp 2.500.000</strong></span>
+                    <span style="font-size: 10px; background: #F59E0B; color: white; padding: 2px 8px; border-radius: 10px;">SafePay Aktif</span>
+                  </div>
+
+                  <!-- Messages Stream -->
+                  <div class="chat-messages-container" id="chatStream">
+                    <div class="chat-bubble umkm-msg">
+                      Halo Edwin! Kami sudah melihat portofolio kamu di SkillBridge. Konsep visualmu sangat pas dengan vibe cafe kami.
+                      <div class="chat-timestamp">10:15</div>
+                    </div>
+
+                    <div class="chat-bubble student-msg">
+                      Halo Pak Hendra, terima kasih banyak! Saya siap membantu pengerjaan 9 template feed dan buku menu baru. Apakah ada aset logo resolusi tinggi?
+                      <div class="chat-timestamp">10:18</div>
+                    </div>
+
+                    <div class="chat-bubble umkm-msg">
+                      Sudah saya lampirkan di Google Drive. Escrow dana Rp 2.500.000 juga sudah saya setor ke SkillBridge ya. Semangat!
+                      <div class="chat-timestamp">10:20</div>
+                    </div>
+
+                    <div class="chat-bubble student-msg">
+                      Siap Pak, draft pertama akan saya kirimkan lusa untuk direview. Terima kasih! ☕🎨
+                      <div class="chat-timestamp">10:22</div>
+                    </div>
+                  </div>
+
+                  <!-- Chat Input Bar -->
+                  <div class="chat-input-bar">
+                    <input type="text" id="chatInput" placeholder="Tulis pesan ke Pak Hendra.." onkeydown="if(event.key==='Enter') sendChatMessage()">
+                    <button class="chat-send-btn" onclick="sendChatMessage()">
+                      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- ==============================================
+                   SCREEN 6: PROFIL MAHASISWA & VERIFIKASI SKILL
+                   ============================================== -->
+              <div class="screen-container" id="screen-profile">
+                <div class="profile-screen">
+                  
+                  <div class="profile-header-card">
+                    <img src="assets/images/avatar_ryan.jpg" alt="Edwin Iqbal" class="profile-avatar-large">
+                    <h3 class="profile-name">Edwin Iqbal Santoso</h3>
+                    <p class="profile-campus">🎓 Universitas Indonesia • Sistem Informasi (2023)</p>
+                    
+                    <div class="profile-stats-row">
+                      <div class="stat-item">
+                        <h4>18</h4>
+                        <p>Proyek Selesai</p>
+                      </div>
+                      <div class="stat-item">
+                        <h4>4.95 ⭐</h4>
+                        <p>Rating UMKM</p>
+                      </div>
+                      <div class="stat-item">
+                        <h4>100%</h4>
+                        <p>Ketepatan Waktu</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="profile-body-sections">
+                    <!-- Dompet Saldo Card -->
+                    <div class="profile-card-block">
+                      <div class="card-title-row">
+                        <h4>💰 Dompet Penghasilan</h4>
+                        <button class="show-all-link" onclick="showToast('Proses penarikan ke rekening BCA/GoPay berhasil dibuat!')">Tarik Saldo</button>
+                      </div>
+                      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+                        <span style="font-size: 22px; font-weight: 800; color: var(--c-teal-deep);">Rp 4.250.000</span>
+                        <span style="font-size: 11px; color: #10B981; font-weight: 700;">+ Rp 1.500.000 minggu ini</span>
+                      </div>
+                      <p style="font-size: 11.5px; color: var(--c-text-muted);">Dana aman dalam Escrow: Rp 2.500.000</p>
+                    </div>
+
+                    <!-- Verified Skills Tests -->
+                    <div class="profile-card-block">
+                      <div class="card-title-row">
+                        <h4>🛡️ Hasil Verifikasi Keahlian</h4>
+                        <span style="font-size: 11px; color: var(--c-teal-medium); font-weight: 700;">Ujian Standar SkillBridge</span>
+                      </div>
+
+                      <div class="skill-bar-item">
+                        <div class="skill-label-row">
+                          <span>UI/UX & Figma Design</span>
+                          <span style="color: var(--c-teal-deep);">98 / 100 (Expert)</span>
+                        </div>
+                        <div class="skill-progress-track">
+                          <div class="skill-progress-fill" style="width: 98%;"></div>
+                        </div>
+                      </div>
+
+                      <div class="skill-bar-item">
+                        <div class="skill-label-row">
+                          <span>Social Media & Canva Content</span>
+                          <span style="color: var(--c-teal-deep);">94 / 100 (Advanced)</span>
+                        </div>
+                        <div class="skill-progress-track">
+                          <div class="skill-progress-fill" style="width: 94%;"></div>
+                        </div>
+                      </div>
+
+                      <div class="skill-bar-item">
+                        <div class="skill-label-row">
+                          <span>Financial & Excel Bookkeeping</span>
+                          <span style="color: var(--c-teal-deep);">90 / 100 (Certified)</span>
+                        </div>
+                        <div class="skill-progress-track">
+                          <div class="skill-progress-fill" style="width: 90%;"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Ulasan dari UMKM -->
+                    <div class="profile-card-block">
+                      <div class="card-title-row">
+                        <h4>💬 Ulasan dari Pemilik UMKM</h4>
+                      </div>
+                      <div style="background: #F8FBFA; padding: 12px; border-radius: 12px; margin-bottom: 8px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                          <strong style="font-size: 12.5px;">Kopi Sentosa</strong>
+                          <span style="color: #F59E0B; font-size: 11px;">⭐⭐⭐⭐⭐ 5.0</span>
+                        </div>
+                        <p style="font-size: 11.5px; color: var(--c-text-secondary); line-height: 1.4;">
+                          "Hasil desain feed Edwin sangat memuaskan, estetis, dan barista kami langsung bisa mengedit template Canva yang dibuat!"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- ==============================================
+                   SCREEN 7: POST MICRO-JOB (MODE UMKM)
+                   ============================================== -->
+              <div class="screen-container" id="screen-umkm-post">
+                <div style="padding: 50px 20px 80px; background: var(--c-white); min-height: 100%;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                    <div>
+                      <span class="umkm-mode-badge">🏪 Portal Pemilik UMKM</span>
+                      <h2 style="font-size: 20px; font-weight: 800; color: var(--c-text-primary); margin-top: 6px;">Unggah Kebutuhan Kerja</h2>
+                    </div>
+                  </div>
+
+                  <p style="font-size: 12.5px; color: var(--c-text-secondary); margin-bottom: 20px;">
+                    Dapatkan bantuan mahasiswa terampil secara fleksibel untuk desain, pembukuan, atau medsos bisnismu.
+                  </p>
+
+                  <div class="form-group">
+                    <label>Judul Kebutuhan Pekerjaan</label>
+                    <input type="text" class="form-input" id="postJobTitle" value="Desain Banner Promo & Katalog Lebaran">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Kategori Keterampilan</label>
+                    <select class="form-input" id="postJobCategory">
+                      <option>Desain Grafis & Banner</option>
+                      <option>Pengelolaan Instagram & TikTok</option>
+                      <option>Pembukuan Kas Sederhana</option>
+                      <option>Input Data & Admin Toko</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Total Anggaran Honor (Escrow SafePay)</label>
+                    <input type="text" class="form-input" id="postJobBudget" value="Rp 1.800.000">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Tenggat Waktu Pengerjaan</label>
+                    <input type="text" class="form-input" id="postJobDeadline" value="7 Hari (Fleksibel)">
+                  </div>
+
+                  <div class="form-group">
+                    <label>Deskripsi & Target Pekerjaan (Project Goal)</label>
+                    <textarea class="form-textarea" rows="3">Membuat 5 desain banner promosi untuk WhatsApp dan cetak spanduk depan toko.</textarea>
+                  </div>
+
+                  <button class="discover-more-btn" onclick="submitUmkmPost()">
+                    🚀 Pasang Lowongan & Kunci Escrow
+                  </button>
+                </div>
+              </div>
+
+            </div> <!-- /phone-screen-viewport -->
+
+            <!-- Phone Bottom Navigation Dock (like PDF Screenshots) -->
+            <div class="phone-bottom-nav">
+              <button class="nav-item active" id="bNavHome" onclick="navToScreen('screen-home')">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>Beranda</span>
+              </button>
+
+              <button class="nav-item" id="bNavNearby" onclick="navToScreen('screen-nearby')">
+                <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                <span>Nearby</span>
+              </button>
+
+              <button class="nav-item" id="bNavChat" onclick="navToScreen('screen-chat')">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                <span>Pesan</span>
+                <span class="badge-count">2</span>
+              </button>
+
+              <button class="nav-item" id="bNavProfile" onclick="navToScreen('screen-profile')">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>Profil</span>
+              </button>
+
+              <div class="home-indicator"></div>
+            </div>
+
+          </div> <!-- /phone-inner -->
+        </div> <!-- /phone-wrapper -->
+      </div> <!-- /simulator-stage -->
+    </div> <!-- /viewSimulator -->
+
+
+    <!-- ==========================================
+         VIEW 2: MULTI-SCREEN SHOWCASE (BEHANCE / DRIBBLE GALLERY)
+         Side-by-side presentation of key screens
+         ========================================== -->
+    <div id="viewMultiShowcase" class="multi-showcase-container">
+      
+      <div class="showcase-hero-intro">
+        <h2>SkillBridge Design System Showcase</h2>
+        <p>Kombinasi elegan antara estetika editorial modern (Dark Sea Teal `#0E6973` & `#118C8C`, Soft Mint `#BAD9CE`, Citrus Gold `#F2BB16`, Amber Ochre `#BF820F`) dengan arsitektur rekrutmen profesional Glints & LinkedIn.</p>
+      </div>
+
+      <div class="gallery-grid">
+        
+        <!-- Screen 1 Preview -->
+        <div class="gallery-card">
+          <span class="gallery-card-badge">Screen 1</span>
+          <h3 class="gallery-card-title">Beranda Mahasiswa & Rekomendasi</h3>
+          <p class="gallery-card-desc">Curved header beraksen dark teal, bar pencarian dengan filter, status SafePay Escrow, dan carousel micro-job terverifikasi.</p>
+          <div class="gallery-phone-preview" style="background: #F7FAF9;">
+            <div style="background: #0E6973; padding: 20px; color: white; border-radius: 0 0 24px 24px;">
+              <p style="font-size: 11px; opacity: 0.8;">Hallo,</p>
+              <h4 style="font-size: 15px; font-weight: 700;">Edwin Iqbal Santoso ✓</h4>
+              <h3 style="font-size: 18px; margin-top: 10px; font-weight: 800;">Take Big Steps in Your Career</h3>
+            </div>
+            <div style="padding: 16px;">
+              <div style="background: white; border: 1px solid #dce8e5; padding: 12px; border-radius: 16px; margin-bottom: 12px;">
+                <img src="assets/images/coffee_shop.jpg" style="width: 100%; height: 120px; border-radius: 12px; object-fit: cover;">
+                <h5 style="font-size: 14px; margin-top: 8px;">Redesign Menu & Feed IG</h5>
+                <p style="font-size: 11px; color: #567276;">Kopi Sentosa Cafe • 1.8 KM</p>
+                <div style="color: #0E6973; font-weight: 800; margin-top: 4px;">Rp 2.500.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 2 Preview -->
+        <div class="gallery-card">
+          <span class="gallery-card-badge">Screen 2</span>
+          <h3 class="gallery-card-title">Peta Pekerjaan Terdekat (Nearby)</h3>
+          <p class="gallery-card-desc">Peta navigasi vektor jalanan kota (PDF page 2, 8, 29), rute jarak tempuh mahasiswa ke UMKM, serta floating card preview.</p>
+          <div class="gallery-phone-preview" style="background: #E8EFF2; display: flex; flex-direction: column; justify-content: space-between; padding: 14px;">
+            <div style="background: white; padding: 8px 14px; border-radius: 30px; font-size: 12px; font-weight: 700; align-self: flex-start; color: #0E6973; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+              📍 Radius 3 KM • 5 UMKM
+            </div>
+            <div style="text-align: center; margin: 30px 0;">
+              <span style="background: #0E6973; color: white; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 700;">
+                ⚡ Jarak: 1.8 KM (12 Mnt)
+              </span>
+            </div>
+            <div style="background: white; border-radius: 18px; padding: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+              <img src="assets/images/coffee_shop.jpg" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
+              <div style="flex:1;">
+                <strong style="font-size: 12px; display: block;">Kopi Sentosa</strong>
+                <span style="font-size: 11px; color: #0E6973; font-weight: 700;">Rp 2.500.000</span>
+              </div>
+              <span style="background: #0E6973; color: white; font-size: 10px; font-weight: bold; padding: 6px 12px; border-radius: 20px;">Details</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 3 Preview -->
+        <div class="gallery-card">
+          <span class="gallery-card-badge">Screen 3</span>
+          <h3 class="gallery-card-title">Tentang Pekerjaan & SafePay Escrow</h3>
+          <p class="gallery-card-desc">Detail deliverables, target proyek, skill terverifikasi, profil pemilik UMKM, serta tombol Apply for Project.</p>
+          <div class="gallery-phone-preview" style="background: white; padding: 16px;">
+            <img src="assets/images/design_workspace.jpg" style="width: 100%; height: 120px; border-radius: 14px; object-fit: cover; margin-bottom: 12px;">
+            <h4 style="font-size: 15px; font-weight: 800; color: #0E6973;">BRAND GUIDE & DASHBOARD</h4>
+            <p style="font-size: 11px; color: #118C8C; font-weight: 600; margin-bottom: 8px;">Product & Design System</p>
+            <div style="background: #F0F9F8; border: 1px solid #BAD9CE; border-radius: 12px; padding: 10px; margin-bottom: 10px; font-size: 11px;">
+              <strong>🛡️ SkillBridge SafePay</strong>
+              <p style="color: #567276; margin-top: 2px;">Dana Rp 3.500.000 sudah dikunci di Escrow.</p>
+            </div>
+            <div style="background: #F2BB16; color: #09474e; font-weight: 800; text-align: center; padding: 10px; border-radius: 30px; font-size: 12px;">
+              Apply for Project ›
+            </div>
+          </div>
+        </div>
+
+        <!-- Screen 4 Preview -->
+        <div class="gallery-card">
+          <span class="gallery-card-badge">Screen 4</span>
+          <h3 class="gallery-card-title">Success. You've Applied.</h3>
+          <p class="gallery-card-desc">Ilustrasi kolaborasi mahasiswa & UMKM (PDF page 14-16), status tracking terkirim, dan direct chat channel.</p>
+          <div class="gallery-phone-preview" style="background: white; padding: 20px; text-align: center;">
+            <img src="assets/images/success_applied.jpg" style="width: 130px; height: 130px; border-radius: 16px; object-fit: cover; margin-bottom: 12px;">
+            <h4 style="font-size: 15px; font-weight: 800; color: #11282c;">Success. You've Applied.</h4>
+            <p style="font-size: 11px; color: #567276; margin-bottom: 14px;">Kami akan memberikan informasi terbaru melalui kanal Message.</p>
+            <div style="background: #0E6973; color: white; padding: 8px; border-radius: 20px; font-size: 11.5px; font-weight: 700;">
+              Discover More
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         VIEW 3: DESIGN SYSTEM & COLOR PALETTE INSPECTOR
+         Matching user's reference image 1
+         ========================================== -->
+    <div id="viewDesignSystem" class="design-system-container">
+      
+      <div class="showcase-hero-intro">
+        <h2>Brand Identity & Color Tokens</h2>
+        <p>Ekstraksi tepat dari palet warna referensi pengguna dengan rasio kontras WCAG AA/AAA untuk antarmuka micro-job profesional.</p>
+      </div>
+
+      <!-- Swatches Grid -->
+      <div class="swatch-grid">
+        
+        <!-- Swatch 1: #0E6973 -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: #0E6973;">
+            <span class="swatch-hex-pill">#0E6973</span>
+          </div>
+          <div class="swatch-details">
+            <h4 class="swatch-name">Deep Pine Teal</h4>
+            <p class="swatch-role">Primary Header, Dominant Dark Contrast, Brand Pillars & Structural Elements</p>
+            <button class="copy-hex-btn" onclick="copyHex('#0E6973')">Salin HEX (#0E6973)</button>
+          </div>
+        </div>
+
+        <!-- Swatch 2: #118C8C -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: #118C8C;">
+            <span class="swatch-hex-pill">#118C8C</span>
+          </div>
+          <div class="swatch-details">
+            <h4 class="swatch-name">Medium Ocean Teal</h4>
+            <p class="swatch-role">Primary Action Buttons, Polyline Route Map, Verified Chips, Links</p>
+            <button class="copy-hex-btn" onclick="copyHex('#118C8C')">Salin HEX (#118C8C)</button>
+          </div>
+        </div>
+
+        <!-- Swatch 3: #BAD9CE -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: #BAD9CE;">
+            <span class="swatch-hex-pill" style="color: #0E6973; background: rgba(255,255,255,0.7);">#BAD9CE</span>
+          </div>
+          <div class="swatch-details">
+            <h4 class="swatch-name">Soft Mint Sage</h4>
+            <p class="swatch-role">Card Backgrounds, Subtle Tag Badges, Secondary Surfaces & Border Accents</p>
+            <button class="copy-hex-btn" onclick="copyHex('#BAD9CE')">Salin HEX (#BAD9CE)</button>
+          </div>
+        </div>
+
+        <!-- Swatch 4: #F2BB16 -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: #F2BB16;">
+            <span class="swatch-hex-pill" style="color: #0E6973; background: rgba(255,255,255,0.8);">#F2BB16</span>
+          </div>
+          <div class="swatch-details">
+            <h4 class="swatch-name">Citrus Gold Yellow</h4>
+            <p class="swatch-role">High Energy CTAs, Star Ratings, Tagline Underline, Bookmarked State</p>
+            <button class="copy-hex-btn" onclick="copyHex('#F2BB16')">Salin HEX (#F2BB16)</button>
+          </div>
+        </div>
+
+        <!-- Swatch 5: #BF820F -->
+        <div class="swatch-card">
+          <div class="swatch-color-box" style="background: #BF820F;">
+            <span class="swatch-hex-pill">#BF820F</span>
+          </div>
+          <div class="swatch-details">
+            <h4 class="swatch-name">Warm Ochre Amber</h4>
+            <p class="swatch-role">Verified UMKM Badges, Escrow Payout Warnings, Warm Gradients</p>
+            <button class="copy-hex-btn" onclick="copyHex('#BF820F')">Salin HEX (#BF820F)</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- ==========================================
+       APPLY MODAL OVERLAY
+       ========================================== -->
+  <div class="apply-modal-overlay" id="applyModalOverlay">
+    <div class="apply-modal-card">
+      <div class="modal-header">
+        <h3>Lamar Micro-Job</h3>
+        <button class="modal-close-btn" onclick="closeApplyModal()">✕</button>
+      </div>
+
+      <div style="background: #F0F7F5; border-radius: 14px; padding: 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+        <img src="assets/images/avatar_ryan.jpg" style="width: 44px; height: 44px; border-radius: 12px; object-fit: cover;">
+        <div>
+          <strong style="font-size: 13.5px;">Edwin Iqbal Santoso</strong>
+          <p style="font-size: 11px; color: var(--c-teal-deep);">🎓 UI • Verified Skill Score 98%</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Pesan Singkat / Pitch ke UMKM</label>
+        <textarea class="form-textarea" id="applyPitchMsg" rows="3">Halo tim Kopi Sentosa! Saya berpengalaman mendesain branding & feed Canva untuk UMKM kuliner. Siap menyelesaikan desain dalam 4 hari kerja.</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Pilih Lampiran Portofolio</label>
+        <select class="form-input">
+          <option>🎨 Portofolio F&B Branding & Social Media (PDF/Figma)</option>
+          <option>📊 Dashboard Analitik & Pembukuan Kas Toko</option>
+          <option>📱 Video Reels & Katalog Produk</option>
+        </select>
+      </div>
+
+      <button class="discover-more-btn" onclick="submitApplication()">
+        Kirim Lamaran Sekarang ✨
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Toast Notice -->
+  <div class="toast-notice" id="toastNotice">Notifikasi</div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
